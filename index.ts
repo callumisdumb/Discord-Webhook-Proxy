@@ -87,7 +87,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const windowMs = 1 * 60 * 1000;
 const maxPerWindow = 30;
@@ -236,7 +236,7 @@ app.post("/api/webhooks/:id/:token", limiter, (req, res) => {
         } else if (validateRequest(req, res)) {
             handleCounter(req);
             roundRobinInstance().post(`https://discord.com/api/webhooks/${req.params.id}/${req.params.token}`, req.body).then(result => {
-                console.log(result)
+                console.log(res)
                 handleResponse(req, res, result);
             }).catch(err => {
                 if (err.response.status === 404) {
