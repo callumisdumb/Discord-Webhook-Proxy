@@ -236,6 +236,7 @@ app.post("/api/webhooks/:id/:token", limiter, (req, res) => {
         } else if (validateRequest(req, res)) {
             handleCounter(req);
             roundRobinInstance().post(`https://discord.com/api/webhooks/${req.params.id}/${req.params.token}`, req.body).then(result => {
+                console.log(result)
                 handleResponse(req, res, result);
             }).catch(err => {
                 if (err.response.status === 404) {
