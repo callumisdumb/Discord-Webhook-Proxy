@@ -61,7 +61,7 @@ for (let address of addresses) {
             localAddress: address
         }),
         headers: {
-            Via: "HyraWebhookProxy/2.0"
+            Via: "Txtbse/2.0"
         }
     }))
 }
